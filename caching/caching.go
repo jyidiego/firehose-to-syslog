@@ -63,7 +63,7 @@ func GetAppByGuid(appGuid string) []App {
 	app, err := gcfClient.AppByGuid(appGuid)
 
 	if err != nil {
-		return fmt.Errorf("Error gcfClient.AppByGuid: %s", err)
+		return fmt.Errorf("Error with gcfClient.AppByGuid.")
 	}
 
 	apps = append(apps, App{app.Name, app.Guid, app.SpaceData.Entity.Name, app.SpaceData.Entity.Guid, app.SpaceData.Entity.OrgData.Entity.Name, app.SpaceData.Entity.OrgData.Entity.Guid})
@@ -85,7 +85,7 @@ func GetAllApp() []App {
 
 	tmpAppList, err := gcfClient.ListApps()
 	if err != nil {
-		return fmt.Errorf("Error gcfClient.ListApps: %s", err)
+		return fmt.Errorf("Error with gcfClient.ListApps")
 	}
 
 	for _, app := range tmpAppList {
