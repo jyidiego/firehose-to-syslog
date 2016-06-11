@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 	"github.com/boltdb/bolt"
-	"github.com/cloudfoundry-community/firehose-to-syslog/caching"
 	"github.com/cloudfoundry-community/firehose-to-syslog/events"
 	"github.com/cloudfoundry-community/firehose-to-syslog/extrafields"
 	"github.com/cloudfoundry-community/firehose-to-syslog/firehose"
 	"github.com/cloudfoundry-community/firehose-to-syslog/logging"
 	"github.com/cloudfoundry-community/go-cfclient"
+	"github.com/jyidiego/firehose-to-syslog/caching"
 	"github.com/pkg/profile"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"log"
