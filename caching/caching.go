@@ -60,7 +60,12 @@ func FillDatabase(listApps []App) {
 
 func GetAppByGuid(appGuid string) []App {
 	var apps []App
-	app := gcfClient.AppByGuid(appGuid)
+	app, err := gcfClient.AppByGuid(appGuid)
+
+	if err != nil {
+		return fmt.Errorf("Error gcfClient.AppByGuid: %s", err)
+	}
+
 	apps = append(apps, App{app.Name, app.Guid, app.SpaceData.Entity.Name, app.SpaceData.Entity.Guid, app.SpaceData.Entity.OrgData.Entity.Name, app.SpaceData.Entity.OrgData.Entity.Guid})
 	FillDatabase(apps)
 	return apps
@@ -78,7 +83,12 @@ func GetAllApp() []App {
 		}
 	}()
 
-	for _, app := range gcfClient.ListApps() {
+	tmpAppList, err := gcfClient.ListApps()
+	if err != nil {
+		return fmt.Errorf("Error gcfClient.ListApps: %s", err)
+	}
+
+	for _, app := range tmpAppList {
 		log.LogStd(fmt.Sprintf("App [%s] Found...", app.Name), false)
 		apps = append(apps, App{app.Name, app.Guid, app.SpaceData.Entity.Name, app.SpaceData.Entity.Guid, app.SpaceData.Entity.OrgData.Entity.Name, app.SpaceData.Entity.OrgData.Entity.Guid})
 	}
